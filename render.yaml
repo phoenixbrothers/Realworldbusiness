@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: realworld-business-simulation
+    runtime: node
+    plan: starter
+    region: oregon
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: NODE_VERSION
+        value: 22.13.0
+      - key: DATABASE_PATH
+        value: /var/data/realworld.sqlite
+      - key: SESSION_TTL_HOURS
+        value: 72
+      - key: COOKIE_SECURE
+        value: true
+    disk:
+      name: realworld-data
+      mountPath: /var/data
+      sizeGB: 1

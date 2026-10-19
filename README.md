@@ -127,3 +127,13 @@ Invariants checked after **every** accepted action:
 - Login rate-limiting is in-memory (per process).
 - The 3D campus is procedural low-poly geometry rather than high-fidelity art assets.
 - No i18n; the UI is English with Indian number formatting.
+
+## Deploy to Render
+
+This repo includes a `render.yaml` blueprint: one Node web service, built with `npm install && npm run build` and started with `npm start`, with a 1 GB persistent disk mounted at `/var/data` so the SQLite database survives deploys and restarts.
+
+1. In the Render dashboard: **New → Blueprint**, connect this repository, and accept the plan.
+2. Render builds and deploys automatically on every push to `main`.
+3. Health check: `GET /api/health`.
+
+No external services or API keys are required — the whole platform (engine, API, and SQLite) runs in the one service.
