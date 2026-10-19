@@ -13,6 +13,7 @@ import { PageHeader } from '../components/Shell';
 import { LinesChart, Waterfall } from '../components/Charts';
 import { usePeriod } from './Finance';
 import { Badge, Button, Callout, DataTypeBadge, Empty, Field, Loading, MoneyInput, Panel, Seg, Table, Tabs } from '../components/ui';
+import { useTour } from '../components/Tour';
 import type { Projection } from '../types';
 
 type ReportId = 'pnl' | 'balance' | 'cashflow' | 'trial' | 'sales' | 'production' | 'inventory' | 'suppliers' | 'workforce' | 'rnd' | 'market' | 'exposure' | 'risk';
@@ -262,8 +263,12 @@ function Scenario() {
 }
 
 function Guide() {
+  const tour = useTour();
   return (
     <div className="grid g2">
+      <Panel title="Guided tour" className="span2" sub="Replay the on-screen walkthrough of the overview page — navigation, key numbers, the business campus and what-to-do-next list.">
+        <Button variant="primary" onClick={tour.start}>Restart tutorial</Button>
+      </Panel>
       <Panel title="The monthly loop">
         <ol className="small" style={{ paddingLeft: 18, margin: 0, lineHeight: 1.8 }}>
           <li>Review the overview: status, risks and the next action.</li>

@@ -4,6 +4,7 @@ import { BrowserRouter, Navigate, Route, Routes, useParams } from 'react-router-
 import './styles.css';
 import { SessionProvider, ToastProvider, WorldProvider, useSession, useWorld } from './store';
 import { Shell } from './components/Shell';
+import { TourProvider } from './components/Tour';
 import { Loading, ErrorState, Empty } from './components/ui';
 import { AuthPage } from './pages/Auth';
 import { WorldsPage } from './pages/Worlds';
@@ -92,7 +93,9 @@ createRoot(document.getElementById('root')!).render(
     <BrowserRouter>
       <ToastProvider>
         <SessionProvider>
-          <App />
+          <TourProvider>
+            <App />
+          </TourProvider>
         </SessionProvider>
       </ToastProvider>
     </BrowserRouter>

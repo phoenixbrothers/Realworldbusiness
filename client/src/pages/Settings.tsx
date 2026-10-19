@@ -6,12 +6,14 @@ import { useSession, useToast, useWorld } from '../store';
 import { PageHeader } from '../components/Shell';
 import { hasWebGL } from '../components/Campus';
 import { Badge, Button, Callout, Confirm, Field, Panel, Table } from '../components/ui';
+import { useTour } from '../components/Tour';
 
 interface Member { id: string; name: string; email: string; role: string; added_at: string }
 
 export default function Settings() {
   const { user, setUser, updatePrefs } = useSession();
   const { view, worldId } = useWorld();
+  const tour = useTour();
   const toast = useToast();
   const nav = useNavigate();
   const [name, setName] = useState(user?.name ?? '');
@@ -57,6 +59,9 @@ export default function Settings() {
             <label className="check"><input type="checkbox" checked={p.enable3d !== false} onChange={(e) => run('pref', () => updatePrefs({ enable3d: e.target.checked }), '3D preference saved')} /> Show the interactive 3D campus</label>
             {!hasWebGL() && <Callout tone="warn">WebGL is not available on this device; the 2D isometric campus is used instead.</Callout>}
           </div>
+        </Panel>
+        <Panel title="Guided tour" sub="Replay the walkthrough of the overview page's navigation, key numbers and what-to-do-next list.">
+          <Button onClick={tour.start}>Restart tutorial</Button>
         </Panel>
         <Panel title="Change password">
           <div className="stack">

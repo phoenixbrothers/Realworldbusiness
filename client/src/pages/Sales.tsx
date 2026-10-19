@@ -36,7 +36,7 @@ export default function Sales() {
             <dt>Customer satisfaction</dt><dd>{c.satisfaction.toFixed(0)} / 100</dd>
             <dt>Domestic channel mix</dt><dd>40% online (cash, 2% fee) · 60% distributors (net 30)</dd>
             <dt>Export terms</dt><dd>Importers, net 60</dd>
-            <dt>Open receivables</dt><dd>{inr(openAR.reduce((a, r) => a + r.amount, 0))} ({openAR.length})</dd>
+            <dt>Open receivables</dt><dd>{inr(openAR.reduce((a, r) => a + r.amount, 0), { compact: true })} ({openAR.length})</dd>
             <dt>Sales & marketing headcount</dt><dd>{num(c.teams.filter((t) => t.department === 'sales_marketing').reduce((a, t) => a + t.headcount, 0))}</dd>
           </dl>
           <p className="small faint mt">Satisfaction rises with quality and falls with stockouts; it feeds next month's market share. Sales coverage below ~12 effective sales staff reduces domestic share.</p>

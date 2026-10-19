@@ -40,7 +40,17 @@ check(true, 'registered and redirected to worlds');
 await page.getByRole('button', { name: 'Consumer electronics' }).click();
 await page.waitForURL('**/overview', { timeout: 60000 });
 await page.getByRole('heading', { name: 'World overview' }).waitFor();
-check(await page.getByRole('heading', { name: 'Needs attention' }).isVisible(), 'overview shows Needs attention');
+
+// onboarding tour auto-starts for a brand-new user; verify it, then skip so the rest of the flow can interact with the page
+const tourDialog = page.locator('.tour-root');
+await tourDialog.waitFor({ timeout: 5000 });
+check(await page.getByText('Welcome to REALWORLD').isVisible(), 'onboarding tour auto-starts for a new user');
+await tourDialog.getByRole('button', { name: 'Next' }).click();
+check(await page.getByText('Navigation', { exact: true }).isVisible(), 'tour step 2 highlights navigation');
+await tourDialog.getByRole('button', { name: 'Skip' }).click();
+check((await page.locator('.tour-root').count()) === 0, 'tour closes on Skip');
+
+check(await page.getByRole('heading', { name: 'What should I do next?' }).isVisible(), 'overview shows What should I do next');
 check((await page.locator('.kpi').count()) === 4, 'overview has 4 KPI tiles');
 await page.waitForTimeout(2500);
 await snap('01-overview');

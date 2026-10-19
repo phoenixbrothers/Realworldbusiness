@@ -220,8 +220,8 @@ export default function NewCompany() {
                 <dt>Products</dt><dd>{f.products.map((p) => catalog.templates[p].name).join(', ')}</dd>
                 <dt>Location</dt><dd>{f.city}, India</dd>
                 <dt>Strategy</dt><dd>{STRATEGIES.find((s) => s.id === f.strategy)!.label}</dd>
-                <dt>Founder equity</dt><dd>{inr(f.founderCapital)}</dd>
-                <dt>Opening loan</dt><dd>{inr(f.openingLoan)}</dd>
+                <dt>Founder equity</dt><dd>{inr(f.founderCapital, { compact: true })}</dd>
+                <dt>Opening loan</dt><dd>{inr(f.openingLoan, { compact: true })}</dd>
               </dl>
               <Callout tone="info" title="What happens when you register">
                 Founder capital is posted to share capital, facilities are capitalized or leased, ₹5 L of incorporation fees are expensed, starting teams are hired and the cheapest suppliers for your materials are pre-qualified. You will then need to order materials and set a production plan.
@@ -243,15 +243,15 @@ export default function NewCompany() {
           {est ? (
             <div className="stack">
               <dl className="kv">
-                <dt>Capital raised</dt><dd>{inr(f.founderCapital + f.openingLoan)}</dd>
-                <dt>Facility capex</dt><dd>{inr(-est.capex)}</dd>
-                <dt>Incorporation fees</dt><dd>{inr(-est.fees)}</dd>
-                <dt><b>Cash after setup</b></dt><dd><b>{inr(est.cashAfterSetup)}</b></dd>
+                <dt>Capital raised</dt><dd>{inr(f.founderCapital + f.openingLoan, { compact: true })}</dd>
+                <dt>Facility capex</dt><dd>{inr(-est.capex, { compact: true })}</dd>
+                <dt>Incorporation fees</dt><dd>{inr(-est.fees, { compact: true })}</dd>
+                <dt><b>Cash after setup</b></dt><dd><b>{inr(est.cashAfterSetup, { compact: true })}</b></dd>
               </dl>
               <div className="divider" />
               <dl className="kv">
-                <dt>Monthly payroll</dt><dd>{inr(est.monthlyPayroll)}</dd>
-                <dt>Monthly facility costs</dt><dd>{inr(est.monthlyFixed)}</dd>
+                <dt>Monthly payroll</dt><dd>{inr(est.monthlyPayroll, { compact: true })}</dd>
+                <dt>Monthly facility costs</dt><dd>{inr(est.monthlyFixed, { compact: true })}</dd>
                 <dt>Months of fixed costs covered</dt><dd>{est.monthsOfRunwayBeforeRevenue}</dd>
               </dl>
               {est.warnings.map((w) => (

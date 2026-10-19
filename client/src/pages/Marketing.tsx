@@ -59,7 +59,7 @@ export default function Marketing() {
           {awarenessTrend.length > 1 && <LinesChart data={awarenessTrend} series={[{ key: 'awareness', name: 'Awareness' }, { key: 'satisfaction', name: 'Satisfaction' }]} height={170} />}
         </Panel>
       </div>
-      <Panel className="mt" title="Campaigns" actions={<span className="small faint">Budget {inr(c.budget.marketing)}/mo · committed {inr(active.reduce((a, x) => a + x.monthlyBudget, 0))}/mo</span>}>
+      <Panel className="mt" title="Campaigns" actions={<span className="small faint">Budget {inr(c.budget.marketing, { compact: true })}/mo · committed {inr(active.reduce((a, x) => a + x.monthlyBudget, 0), { compact: true })}/mo</span>}>
         {c.campaigns.length === 0 ? <Empty title="No campaigns yet" action={<Button onClick={() => setOpen(true)} disabled={!canAct}>Plan a campaign</Button>}>Spending is expensed monthly to GL 6100 and is skipped if cash is short.</Empty> : (
           <Table head={<tr><th>Campaign</th><th>Channel</th><th>Promotes</th><th>Period</th><th className="r">Monthly</th><th className="r">Spent</th><th className="r">Awareness added</th><th>Status</th><th></th></tr>}>
             {[...c.campaigns].reverse().map((x) => (

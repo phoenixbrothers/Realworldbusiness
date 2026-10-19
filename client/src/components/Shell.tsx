@@ -31,7 +31,7 @@ export function Shell({ children }: { children: ReactNode }) {
       <a href="#main" className="skip-link">
         Skip to main content
       </a>
-      <nav className={`sidebar ${open ? 'open' : ''}`} aria-label="Main navigation">
+      <nav className={`sidebar ${open ? 'open' : ''}`} aria-label="Main navigation" data-tour="sidebar">
         <Link to="/worlds" className="brand" style={{ textDecoration: 'none', color: 'inherit' }}>
           <span className="brand-mark" aria-hidden />
           <span>
@@ -120,7 +120,7 @@ function TopBar({ onMenu, companyId }: { onMenu: () => void; companyId: string |
       )}
       <div style={{ flex: 1 }} />
       {w && (
-        <div className="timebox" aria-label="Simulation time">
+        <div className="timebox" aria-label="Simulation time" data-tour="time-control">
           <div className="tb-text">
             <b>{w.label}</b>
             <span>
@@ -207,7 +207,7 @@ function GlobalSearch({ worldId, companyId, onPick }: { worldId: string; company
     onPick(r.module, r.type === 'page' ? undefined : r.id);
   };
   return (
-    <div className="search" role="combobox" aria-expanded={open && results.length > 0} aria-haspopup="listbox" aria-owns="search-results">
+    <div className="search" role="combobox" aria-expanded={open && results.length > 0} aria-haspopup="listbox" aria-owns="search-results" data-tour="search">
       <Search aria-hidden />
       <input
         aria-label="Search products, suppliers, events, journal entries and pages"
