@@ -1,0 +1,10 @@
+import type { worldView, catalog } from '../../server/view';
+export type View = ReturnType<typeof worldView>;
+export type CompanyView = NonNullable<View['company']>;
+export type WorldMeta = View['world'];
+export type Catalog = ReturnType<typeof catalog>;
+export type { Kpi, Alert } from '../../engine/selectors';
+export type { Exposure, MitigationOption, CausalStep } from '../../engine/events';
+export type { Feasibility } from '../../engine/production';
+export type { Projection } from '../../engine/forecast';
+export type { JournalEntry, WorldEvent, Severity, DataType } from '../../engine/types';
